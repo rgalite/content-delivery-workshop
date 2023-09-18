@@ -1,21 +1,49 @@
 # Introduction
 In this lab, we'll create a job to process a file uploaded to a bucket and upload it to a second bucket.
 
-## Streaming download
-Use the documentation to [download](https://cloud.google.com/storage/docs/streaming-downloads#prereq-cli) the file and stream it to ffmeg [proceess](https://ffmpeg.org/ffmpeg-protocols.html#pipe)
+## Setup
+
+Make sure these environment variables are defined before starting
 
 ```
-gcloud storage cp gs://$PROJECT_ID-start/Get-Lucky-Daft-Punk-feat-Pharrell-Williams.flac - | ffmpeg -i pipe:0 -f mp3 pipe:1 | gcloud storage cp - gs://$PROJECT_ID-start/Get-Lucky-Daft-Punk-feat-Pharrell-Williams.mp3
+export PROJECT_ID=$(gcloud config get project)
 ```
+
+Install ffmeg to your local workstation. If you're running this lab in cloud shell or in a debian-based machine, the following commands will install ffmeg.
+Otherwise, please refer to ffmeg [documentation](https://ffmpeg.org/download.html).
+
+```bash
+sudo apt update -y
+sudo apt install -y ffmpeg
+```
+
+## Streaming download
+
+Use the documentation to [download](https://cloud.google.com/storage/docs/streaming-downloads#prereq-cli) the file and stream it to ffmeg [process](https://ffmpeg.org/ffmpeg-protocols.html#pipe).
+
+```bash
+gcloud storage cp gs://$PROJECT_ID-start/Get-Lucky-Daft-Punk-feat-Pharrell-Williams.flac - | ffmpeg -i pipe:0 -f mp3 ./downloads/output.mp3
+```
+
+Make sure the file works by openining it in your IDE or download it to your local workstation.
 
 ## Streaming uploads
-Stream upload for GCS also works. Instead of saving the encoded file locally, let's upload it to the second bucket
+
+Stream upload for GCS also works. Instead of saving the encoded file locally, let's upload it to the second bucket.
+Note that we need to set a content-type to the upload command. Otherwise, gcs will save the file as [application/octet-stream](https://cloud.google.com/storage/docs/metadata#content-type) making the file unplayable.
+
+```bash
+gcloud storage cp gs://$PROJECT_ID-start/Get-Lucky-Daft-Punk-feat-Pharrell-Williams.flac - | ffmpeg -i pipe:0 -f mp3 pipe:1 | gcloud storage cp - gs://$PROJECT_ID-end/Get-Lucky-Daft-Punk-feat-Pharrell-Williams.mp3 --content-type=audio/mp3
 ```
-gcloud storage cp gs://$PROJECT_ID-start/Get-Lucky-Daft-Punk-feat-Pharrell-Williams.flac - | ffmpeg -i pipe:0 -f mp3 pipe:1 | gcloud storage cp - gs://$PROJECT_ID-end/Get-Lucky-Daft-Punk-feat-Pharrell-Williams.mp3
+
+Download the resulting file to your local workstation to make sure it works
+
+```bash
+gcloud storage cp gs://$PROJECT_ID-end/Get-Lucky-Daft-Punk-feat-Pharrell-Williams.mp3 ./downloads/output-end.mp3
 ```
 
 ## Package it to a container and run it
-We're going to need some APIs activated first. Activate artifact registry
+We're going to need some APIs activated first. Activate artifact registry.
 
 ```bash
 gcloud services enable artifactregistry.googleapis.com
@@ -36,11 +64,18 @@ gcloud services enable cloudbuild.googleapis.com
 ```
 
 And run the following command to build our encoder
-```
+```bash
 gcloud builds submit -t europe-west1-docker.pkg.dev/believe-poc/repo/encoder
 ```
 
 Let's see if our encoder works as expected
+
+```bash
+docker run -v ~/.config/gcloud:/root/.config/gcloud \
+    europe-west1-docker.pkg.dev/believe-poc/repo/encoder \
+    gs://$PROJECT_ID-start/Get-Lucky-Daft-Punk-feat-Pharrell-Williams.flac \
+    gs://$PROJECT_ID-end/Get-Lucky-Daft-Punk-feat-Pharrell-Williams.mp3
 ```
-docker run europe-west1-docker.pkg.dev/believe-poc/repo/encoder gs://$PROJECT_ID-start/Get-Lucky-Daft-Punk-feat-Pharrell-Williams.flac gs://$PROJECT_ID-end/Get-Lucky-Daft-Punk-feat-Pharrell-Williams.mp3
-```
+
+## Congratulations!
+We now have a container image that we can encode FLAC files to MP3 from Cloud Storage!
