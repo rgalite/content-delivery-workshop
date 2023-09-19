@@ -36,13 +36,13 @@ Instead of saving the encoded file locally, let's upload it to the second bucket
 Note that we need to set a content-type to the upload command. Otherwise, gcs will save the file as [application/octet-stream](https://cloud.google.com/storage/docs/metadata#content-type) making the file unplayable.
 
 ```bash
-gcloud storage cp gs://$PROJECT_ID-start/Get-Lucky-Daft-Punk-feat-Pharrell-Williams.flac - | ffmpeg -i pipe:0 -f mp3 pipe:1 | gcloud storage cp - gs://$PROJECT_ID-end/Get-Lucky-Daft-Punk-feat-Pharrell-Williams.mp3 --content-type=audio/mp3
+gcloud storage cp gs://$PROJECT_ID-start/Get-Lucky-Daft-Punk-feat-Pharrell-Williams.flac - | ffmpeg -i pipe:0 -f mp3 pipe:1 | gcloud storage cp - gs://$PROJECT_ID-end/lab-2/Get-Lucky-Daft-Punk-feat-Pharrell-Williams.mp3 --content-type=audio/mp3
 ```
 
 Download the resulting file to your local workstation to make sure it works.
 
 ```bash
-gcloud storage cp gs://$PROJECT_ID-end/Get-Lucky-Daft-Punk-feat-Pharrell-Williams.mp3 ./downloads/output-end.mp3
+gcloud storage cp gs://$PROJECT_ID-end/lab-2/Get-Lucky-Daft-Punk-feat-Pharrell-Williams.mp3 ./downloads/output-end.mp3
 ```
 
 ## Package it to a container and run it
