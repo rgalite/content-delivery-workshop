@@ -117,9 +117,7 @@ In the workflow editor, paste the content from `workflow.yaml`.
 
 [Documentation](https://cloud.google.com/workflows/docs/create-workflow-console)
 
-### Task 5 - Use Event Arc
-
-Execute the workflow with the following input
+Manually execute the workflow with the following input
 
 ```json
 {
@@ -131,6 +129,9 @@ Execute the workflow with the following input
 ```
 
 If everything is ran fine, let's move on to the next task.
+Otherwise check the logs in the execution panel or Cloud Logging.
+
+### Task 5 - Use Event Arc
 
 We want to execute the workflow when a new file is pushed to the `start` bucket.
 Edit the workflow and Add a new trigger of type Event Arc.
@@ -144,3 +145,9 @@ Edit the workflow and Add a new trigger of type Event Arc.
 * Grant the missing roles
 
 [Documentation](https://cloud.google.com/workflows/docs/trigger-workflow-eventarc#create_a_trigger_using_the_console)
+
+Drop a new FLAC file in the bucket or make a duplicate of the uploaded file and see the workflow being automatically executed.
+
+```bash
+gcloud storage cp gs://${PROJECT_ID}-start/Get-Lucky-Daft-Punk-feat-Pharrell-Williams.flac gs://${PROJECT_ID}-start/Get-Lucky-Daft-Punk-feat-Pharrell-Williams-2.flac
+```
