@@ -76,14 +76,13 @@ gcloud services enable cloudbuild.googleapis.com
 And run the following command to build our encoder.
 
 ```bash
-gcloud builds submit -t europe-west1-docker.pkg.dev/believe-poc/repo/encoder
+gcloud builds submit -t europe-west1-docker.pkg.dev/${PROJECT_ID}/repository/encoder
 ```
 
 Let's see if our encoder works as expected.
 
 ```bash
-docker run -v ~/.config/gcloud:/root/.config/gcloud \
-    europe-west1-docker.pkg.dev/believe-poc/repo/encoder \
+docker run europe-west1-docker.pkg.dev/${PROJECT_ID}/repository/encoder \
     gs://$PROJECT_ID-start/Get-Lucky-Daft-Punk-feat-Pharrell-Williams.flac \
     gs://$PROJECT_ID-end/Get-Lucky-Daft-Punk-feat-Pharrell-Williams.mp3
 ```

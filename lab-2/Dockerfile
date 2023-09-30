@@ -6,9 +6,9 @@ RUN echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] http://packages.c
 
 RUN apt-get update -y && apt-get install -y ffmpeg google-cloud-cli
 
-COPY ./start.sh /encode
-RUN chmod +x /encode
+COPY ./start.sh /encoder
+RUN chmod +x /encoder
 
 WORKDIR /app
 
-ENTRYPOINT ["/encode"]
+ENTRYPOINT ["/encoder"]
