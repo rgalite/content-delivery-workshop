@@ -83,8 +83,8 @@ Let's see if our encoder works as expected.
 
 ```bash
 docker run europe-west1-docker.pkg.dev/${PROJECT_ID}/repository/encoder \
-    gs://$PROJECT_ID-start/Get-Lucky-Daft-Punk-feat-Pharrell-Williams.flac \
-    gs://$PROJECT_ID-end/Get-Lucky-Daft-Punk-feat-Pharrell-Williams.mp3
+    gs://${PROJECT_ID}-start/Get-Lucky-Daft-Punk-feat-Pharrell-Williams.flac \
+    gs://${PROJECT_ID}-end/lab-2/Get-Lucky-Daft-Punk-feat-Pharrell-Williams.mp3
 ```
 
 ## Congratulations!
