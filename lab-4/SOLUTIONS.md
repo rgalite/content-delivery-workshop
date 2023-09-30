@@ -108,13 +108,19 @@ Give the role `Storage Object Viewer` to the `sa-workflow-flac-to-mp3` service a
       --role="roles/secretmanager.secretAccessor"
   ```
 
-* The workflow will need access our Cloud Run Job. Give the roke invoker to the cloud run job `encoder` to the service account `sa-workflow-flac-to-mp3`.
+* The workflow will need access our Cloud Run Job. Give the role `invoker` and `developer` to the cloud run job `encoder` to the service account `sa-workflow-flac-to-mp3`.
 
-  ```bash
-  gcloud run jobs add-iam-policy-binding encoder --region europe-west1 \
+```bash
+gcloud run jobs add-iam-policy-binding encoder --region europe-west1 \
+    --member=serviceAccount:sa-workflow-flac-to-mp3@${PROJECT_ID}.iam.gserviceaccount.com \
+    --role=roles/run.developer
+```
+
+```bash
+gcloud run jobs add-iam-policy-binding encoder --region europe-west1 \
     --member=serviceAccount:sa-workflow-flac-to-mp3@${PROJECT_ID}.iam.gserviceaccount.com \
     --role=roles/run.invoker
-  ```
+```
 
 ## Task 4
 

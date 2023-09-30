@@ -105,7 +105,7 @@ Give the role `Storage Object Viewer` to the `sa-workflow-flac-to-mp3` service a
 
   [Documentation](https://cloud.google.com/secret-manager/docs/manage-access-to-secrets)
 
-* The workflow will need access our Cloud Run Job. Give the roke invoker to the cloud run job `encoder` to the service account `sa-workflow-flac-to-mp3`.
+* The workflow will need access our Cloud Run Job. Give the role `invoker` and `developer` to the service account on the cloud run job `encoder` `sa-workflow-flac-to-mp3`.
 
   [Documentation](https://cloud.google.com/run/docs/securing/managing-access#job-add-principals)
 
