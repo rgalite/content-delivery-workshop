@@ -136,21 +136,23 @@ gcloud services enable eventarc.googleapis.com \
 ```
 
 ```bash
-gcloud iam service-accounts create sa-gcs-workflow-flac-to-mp3
-```
-
-```bash
-gcloud projects add-iam-policy-binding believe-poc \
+gcloud projects add-iam-policy-binding ${PROJECT_ID} \
   --member="serviceAccount:$(gsutil kms serviceaccount -p ${PROJECT_ID})" \
   --role="roles/pubsub.publisher"
 ```
 
 ```bash
-gcloud eventarc triggers create trigger-gcs-workflow-flac-to-mp3 \
-  --location=eu \
-  --destination-workflow=workflow-flac-to-mp3  \
-  --destination-workflow-location=europe-west1 \
-  --event-filters="type=google.cloud.storage.object.v1.finalized" \
-  --event-filters="bucket=${PROJECT_ID}-start" \
-  --service-account="sa-gcs-workflow-flac-to-mp3@believe-poc.iam.gserviceaccount.com"
+gcloud projects add-iam-policy-binding ${PROJECT_ID} \
+    --member="serviceAccount:sa-workflow-flac-to-mp3@${PROJECT_ID}.iam.gserviceaccount.com" \
+    --role="roles/eventarc.eventReceiver"
+```
+
+```bash
+  gcloud eventarc triggers create trigger-gcs-workflow-flac-to-mp3 \
+    --location=eu \
+    --destination-workflow=workflow-flac-to-mp3  \
+    --destination-workflow-location=europe-west1 \
+    --event-filters="type=google.cloud.storage.object.v1.finalized" \
+    --event-filters="bucket=${PROJECT_ID}-start" \
+    --service-account="sa-workflow-flac-to-mp3@${PROJECT_ID}.iam.gserviceaccount.com"
 ```

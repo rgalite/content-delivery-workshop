@@ -140,7 +140,7 @@ Edit the workflow and Add a new trigger of type Event Arc.
 * The event provider must be `Cloud Storage`
 * The event must be `google.cloud.storage.object.v1.finalized`
 * Select the start bucket
-* Create a servic account for the trigger named: `sa-gcs-workflow-flac-to-mp3`
+* Select the same service account as the workflow: `sa-workflow-flac-to-mp3`
 * Grant the missing roles
 
 [Documentation](https://cloud.google.com/workflows/docs/trigger-workflow-eventarc#create_a_trigger_using_the_console)
