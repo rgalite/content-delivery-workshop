@@ -26,19 +26,10 @@ main:
       assign:
         - project_id: ${sys.get_env("GOOGLE_CLOUD_PROJECT_ID")}
         - secret_id: virus_scanning_api_key
-        - file_id: ${event.data.id}
-        - bucket: ${event.data.bucket}
         - cloud_run_job_name: encoder
         - cloud_run_job_location: europe-west1
-        - source_uri: gs://${event.data.bucket}/lab-4/${event.data.id}
-        - destination_uri: gs://${sys.get_env("GOOGLE_CLOUD_PROJECT_ID")}-end/lab-4/${event.data.id}.
-  - download_file:
-      call: googleapis.storage.v1.objects.get
-      args:
-        bucket: ${bucket}
-        object: ${file_id}
-        alt: "media"
-      result: file_data
+        - source_uri: ${"gs://" + event.data.bucket + "/" + event.data.name}
+        - destination_uri: ${"gs://" + sys.get_env("GOOGLE_CLOUD_PROJECT_ID") + "-end/lab-4/" + text.replace_all(event.data.name, ".flac", ".mp3")}
   - access_string_secret:
       call: googleapis.secretmanager.v1.projects.secrets.versions.accessString
       args:
@@ -50,7 +41,7 @@ main:
       args:
         url: https://httpbin.org/anything
         body:
-          content: ${file_data}
+          file_url: ${source_uri}
           is_safe: true
         headers:
           x-apikey: ${virus_scanning_api_key_str}
@@ -59,7 +50,7 @@ main:
       result: virus_scanning_result
   - virus_scanning_check:
       switch:
-        - condition: ${not(virus_scanning_result.is_safe)}
+        - condition: ${not(virus_scanning_result.body.json.is_safe)}
           return: "not_safe"
   - run_encoder_job:
       call: googleapis.run.v1.namespaces.jobs.run

@@ -123,7 +123,7 @@ Manually execute the workflow with the following input
 {
     "data": {
         "bucket": "<bucket>",
-        "id": "<path-to-a-file>"
+        "name": "<file-name>"
     }
 }
 ```
