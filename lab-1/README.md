@@ -42,13 +42,13 @@ With `-c`, we're telling the API we want to use a Standard Class, and with `-l`,
 Use the gcloud CLI to upload a file to the bucket you just created
 
 ```bash
-gcloud storage cp ./media/Get-Lucky-Daft-Punk-feat-Pharrell-Williams.flac gs://$PROJECT_ID-start/lab-1/Get-Lucky-Daft-Punk-feat-Pharrell-Williams.flac
+gcloud storage cp ./media/Get-Lucky-Daft-Punk-feat-Pharrell-Williams.flac gs://$PROJECT_ID-start/Get-Lucky-Daft-Punk-feat-Pharrell-Williams.flac
 ```
 
 This is the output you should get
 
 ```
-Copying file://./media/Get-Lucky-Daft-Punk-feat-Pharrell-Williams.flac to gs://believe-poc-start/lab-1/Get-Lucky-Daft-Punk-feat-Pharrell-Williams.flac
+Copying file://./media/Get-Lucky-Daft-Punk-feat-Pharrell-Williams.flac to gs://believe-poc-start/Get-Lucky-Daft-Punk-feat-Pharrell-Williams.flac
   Completed files 1/1 | 127.4MiB/127.4MiB
 
 Average throughput: 106.4MiB/s
@@ -57,13 +57,13 @@ Average throughput: 106.4MiB/s
 Now let's try downloading the file to our local workstation.
 
 ```bash
-gcloud storage cp gs://$PROJECT_ID-start/lab-1/Get-Lucky-Daft-Punk-feat-Pharrell-Williams.flac ./downloaded.flac
+gcloud storage cp gs://$PROJECT_ID-start/Get-Lucky-Daft-Punk-feat-Pharrell-Williams.flac ./downloaded.flac
 ```
 
 You should see something like this.
 
 ```
-Copying gs://believe-poc-start/lab-1/Get-Lucky-Daft-Punk-feat-Pharrell-Williams.flac to file://./downloaded.flac
+Copying gs://believe-poc-start/Get-Lucky-Daft-Punk-feat-Pharrell-Williams.flac to file://./downloaded.flac
   Completed files 1/1 | 127.4MiB/127.4MiB
 
 Average throughput: 611.2MiB/s
