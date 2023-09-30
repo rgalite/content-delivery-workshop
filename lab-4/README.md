@@ -47,8 +47,8 @@ Create the following steps:
       * `bucket`: `${event.data.bucket}`
       * `cloud_run_job_name`: `encoder`
       * `cloud_run_job_location`: `europe-west1`
-      * `source_uri`: `gs://${event.data.bucket}/lab-4/${event.data.id}`.
-      * `destination_uri`: The destination URI has the form `gs://${PROJECT_ID}-end/lab-4/filename`.
+      * `source_uri`: `gs://${event.data.bucket}/lab-4/${event.data.id}`
+      * `destination_uri`: The destination URI has the form `gs://${PROJECT_ID}-end/lab-4/filename`
 
     [Documentation](https://cloud.google.com/workflows/docs/reference/syntax/variables#assign-step)
 
