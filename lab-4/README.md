@@ -92,7 +92,7 @@ Create the following steps:
 
   [Documentation](https://cloud.google.com/iam/docs/service-accounts-create#creating)
 
-* Grant the Role `Logging > Logs Writer` to the new service account.
+* Grant the Role `Logging > Logs Writer` and `Workflows > Workflows Invoker` to the new service account.
 
   [Documentation](https://cloud.google.com/iam/docs/granting-changing-revoking-access)
 
