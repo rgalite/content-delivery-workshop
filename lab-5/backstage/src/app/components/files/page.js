@@ -8,7 +8,7 @@ import FileList from "./list"
 
 export default function FilesPage(params) {
   const [sidebarOpen, setSidebarOpen] = useState(false)
-  const [files, setFiles] = useState(params.files)
+  const [files, setFiles] = useState(params.files || [])
 
   const handleClose = useCallback(() => {
     setSidebarOpen(false)
