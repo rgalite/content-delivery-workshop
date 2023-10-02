@@ -13,7 +13,7 @@ export default function FileItem({ name, size, type, createdTime, status }) {
         {type}
       </td>
       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-        {new Date(createdTime._seconds * 1000).toLocaleString()}
+        {createdTime}
       </td>
       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
         {status}

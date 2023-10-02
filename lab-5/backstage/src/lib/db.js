@@ -15,7 +15,7 @@ export const getAllFiles = async () => {
       size,
       type,
       status,
-      createdTime,
+      createdTime: new Date(createdTime._seconds * 1000).toUTCString(),
     }
   })
 
