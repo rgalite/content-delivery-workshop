@@ -1,4 +1,5 @@
 import { addFile, getAllFiles } from "@/lib/db"
+import { copyFile } from "@/lib/storage"
 import { NextResponse } from "next/server"
 
 export const POST = async (request) => {
@@ -9,6 +10,11 @@ export const POST = async (request) => {
     } = json
 
     const file = await addFile({ name, size, type, filename })
+    await copyFile({
+      fileId: file.id,
+      srcFilename: filename,
+      contentType: type,
+    })
 
     return NextResponse.json({
       file: {
