@@ -1,0 +1,30 @@
+import { addFile, getAllFiles } from "@/lib/db"
+import { NextResponse } from "next/server"
+
+export const POST = async (request) => {
+  try {
+    const json = await request.json()
+    const {
+      file: { name, size, type, filename },
+    } = json
+
+    const file = await addFile({ name, size, type, filename })
+
+    return NextResponse.json({
+      file: {
+        id: file.id,
+      },
+    })
+  } catch (error) {
+    console.error("Error when adding new file.", error)
+    return NextResponse.json({
+      error: error.message,
+    })
+  }
+}
+
+export const GET = async () => {
+  return NextResponse.json({
+    files: await getAllFiles(),
+  })
+}
