@@ -70,7 +70,7 @@ gcloud run deploy backstage \
   --image europe-west1-docker.pkg.dev/${PROJECT_ID}/repository/backstage:latest \
   --region europe-west1 \
   --allow-unauthenticated \
-  --update-env-vars=FIRESTORE_PROJECT_ID=${PROJECT_ID},UPLOAD_BUCKET=${PROJECT_ID}-uploads \
+  --update-env-vars=FIRESTORE_PROJECT_ID=${PROJECT_ID},UPLOAD_BUCKET=${PROJECT_ID}-uploads,START_BUCKET=${PROJECT_ID}-start \
   --port=3000 \
   --service-account=backstage@${PROJECT_ID}.iam.gserviceaccount.com
 ```

@@ -57,6 +57,7 @@ You'll need to set up CORS on it to allow upload from a browser. Apply the `cors
   - Container port is 3000
   - environment variable FIRESTORE_PROJECT_ID must be `${PROJECT_ID}`
   - environment variable UPLOAD_BUCKET must be `${PROJECT_ID}-uploads`
+  - environment variable START_BUCKET must be `${PROJECT_ID}-start`
   - Select backstage as a service account
 
   [Documentation](https://cloud.google.com/run/docs/deploying#service)
