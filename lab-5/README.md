@@ -78,4 +78,9 @@ Your app is working well but it's available to everybody. Let's protect it.
 
 ## Task 6 - Bonus 2
 
-The files status are not updated. Update the workflow to update it. Note that the object id saved in base is save in the GCS file metadata.
+The files status are not updated. Update the workflow to update it.<br />
+Note that the object id saved in base is save in the GCS file metadata.
+
+## Task 7 - Bonus 3
+
+Update the code in `lab-5/backstage/src/app/api/files/route.js` to not call `copyFile` but trigger the function from an EventArc trigger, on new file saved in datastore.
