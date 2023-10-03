@@ -61,3 +61,21 @@ You'll need to set up CORS on it to allow upload from a browser. Apply the `cors
   - Select backstage as a service account
 
   [Documentation](https://cloud.google.com/run/docs/deploying#service)
+
+Make sur your new service works.
+
+## Task 5 - Bonus 1
+
+Your app is working well but it's available to everybody. Let's protect it.
+
+- Create a load balancer in front of your Cloud Run Service. You can use nip.io as a custom domain name.
+
+  [Documentation: Set up a global external Application Load Balancer with Cloud Run](https://cloud.google.com/load-balancing/docs/https/setup-global-ext-https-serverless)
+
+- Enable IAP to protect your application.
+
+  [Documentation; Read Enabling IAP for Cloud Run](https://cloud.google.com/iap/docs/enabling-cloud-run)
+
+## Task 6 - Bonus 2
+
+The files status are not updated. Update the workflow to update it. Note that the object id saved in base is save in the GCS file metadata.

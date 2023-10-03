@@ -74,17 +74,3 @@ gcloud run deploy backstage \
   --port=3000 \
   --service-account=backstage@${PROJECT_ID}.iam.gserviceaccount.com
 ```
-
-Make sur your new service works.
-
-## Task 5 - Bonus!
-
-Your app is working well but it's available to everybody. Let's protect it.
-
-- Create a load balancer in front of your Cloud Run Service. You can use nip.io as a custom domain name.
-
-  [Documentation: Set up a global external Application Load Balancer with Cloud Run](https://cloud.google.com/load-balancing/docs/https/setup-global-ext-https-serverless)
-
-- Enable IAP to protect your application.
-
-  [Documentation; Read Enabling IAP for Cloud Run](https://cloud.google.com/iap/docs/enabling-cloud-run)
