@@ -74,3 +74,35 @@ gcloud run deploy backstage \
   --port=3000 \
   --service-account=backstage@${PROJECT_ID}.iam.gserviceaccount.com
 ```
+
+## Task 5
+
+The files status are not updated. Update the workflow to update it.
+
+```yaml
+- assign:
+  # ...
+  file_id: 
+
+- processing_status:
+    call: http.put
+    args:
+      url: ${"<cloud-run-url>/api/files/" + file_id}
+      body:
+        file:
+          status: "processing"
+      headers:
+        accept: application/json
+        content-type: application/json
+
+- complete_status:
+    call: http.put
+    args:
+      url: ${"<cloud-run-url>/api/files/" + file_id}
+      body:
+        file:
+          status: "complete"
+      headers:
+        accept: application/json
+        content-type: application/json
+```

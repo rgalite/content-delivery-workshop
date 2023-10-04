@@ -29,12 +29,14 @@ export default function FileList({ files }) {
           >
             Created
           </th>
-          {/* <th
-            scope="col"
-            className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
-          >
-            Status
-          </th> */}
+          {process.env.SHOW_STATUS && (
+            <th
+              scope="col"
+              className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+            >
+              Status
+            </th>
+          )}
         </tr>
       </thead>
       <tbody className="divide-y divide-gray-200">

@@ -66,6 +66,23 @@ Make sur your new service works.
 
 ## Task 5 - Bonus 1
 
+The files status are not updated. Update the workflow to update it.
+
+- Use the data in `event.data.metadata.fileId` to get the GCS file metadata. The `fileId` will be your reference to the database object to update.
+- There is a endpoint to update files: `/api/files/{fileId}` which accepts payload in the form of:
+
+  ```json
+  {
+    "file": {
+      "status": "processing"
+    }
+  }
+  ```
+
+- Update the environment variable `SHOW_STATUS` to `true` to show it in the app and redeploy your Cloud Run instance.
+
+## Task 6 - Bonus 2
+
 Your app is working well but it's available to everybody. Let's protect it.
 
 - Create a load balancer in front of your Cloud Run Service. You can use nip.io as a custom domain name.

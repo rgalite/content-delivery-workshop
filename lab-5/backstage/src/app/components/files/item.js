@@ -15,9 +15,11 @@ export default function FileItem({ name, size, type, createdTime, status }) {
       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
         {createdTime}
       </td>
-      {/* <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-        {status}
-      </td> */}
+      {process.env.SHOW_STATUS && (
+        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+          {status}
+        </td>
+      )}
     </tr>
   )
 }
