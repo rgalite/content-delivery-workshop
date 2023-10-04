@@ -67,14 +67,14 @@ main:
 
 ### Task 3
 
-* Create a service account named `sa-workflow-flac-to-mp3` for our new Workflow.
+- Create a service account named `sa-workflow-flac-to-mp3` for our new Workflow.
 
   ```bash
   gcloud iam service-accounts create sa-workflow-flac-to-mp3 \
       --description="Service Account used by the Workflow workflow-flac-to-mp3"
   ```
 
-* Grant the Role `Logging > Logs Writer` to the new service account.
+- Grant the Role `Logging > Logs Writer` to the new service account.
 
   ```bash
   gcloud projects add-iam-policy-binding ${PROJECT_ID} \
@@ -82,8 +82,8 @@ main:
     --role=roles/logging.logWriter
   ```
 
-* The Workflow will need to have access to the `PROJECT_ID-start` bucket.
-Give the role `Storage Object Viewer` to the `sa-workflow-flac-to-mp3` service account.
+- The Workflow will need to have access to the `PROJECT_ID-start` bucket.
+  Give the role `Storage Object Viewer` to the `sa-workflow-flac-to-mp3` service account.
 
   ```bash
   gcloud storage buckets add-iam-policy-binding gs://${PROJECT_ID}-start \
@@ -91,7 +91,7 @@ Give the role `Storage Object Viewer` to the `sa-workflow-flac-to-mp3` service a
     --role=roles/storage.objectViewer
   ```
 
-* The workflow will need to have access to our secret. Give the role secret accessor to the secret `virus_scanning_api_key` to the service account `sa-workflow-flac-to-mp3`.
+- The workflow will need to have access to our secret. Give the role secret accessor to the secret `virus_scanning_api_key` to the service account `sa-workflow-flac-to-mp3`.
 
   ```bash
   gcloud secrets add-iam-policy-binding virus_scanning_api_key \
@@ -99,7 +99,7 @@ Give the role `Storage Object Viewer` to the `sa-workflow-flac-to-mp3` service a
       --role="roles/secretmanager.secretAccessor"
   ```
 
-* The workflow will need access our Cloud Run Job. Give the role `invoker` and `developer` to the cloud run job `encoder` to the service account `sa-workflow-flac-to-mp3`.
+- The workflow will need access our Cloud Run Job. Give the role `invoker` and `developer` to the cloud run job `encoder` to the service account `sa-workflow-flac-to-mp3`.
 
 ```bash
 gcloud run jobs add-iam-policy-binding encoder --region europe-west1 \
