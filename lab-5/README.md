@@ -64,7 +64,7 @@ You'll need to set up CORS on it to allow upload from a browser. Apply the `cors
 
 Make sur your new service works.
 
-## Task 5 - Bonus 1
+## Task 5 - Bonus 1 - Update the status
 
 The files status are not updated. Update the workflow to update it.
 
@@ -81,7 +81,7 @@ The files status are not updated. Update the workflow to update it.
 
 - Update the environment variable `SHOW_STATUS` to `true` to show it in the app and redeploy your Cloud Run instance.
 
-## Task 6 - Bonus 2
+## Task 6 - Bonus 2 - Exposing and protecting apps
 
 Your app is working well but it's available to everybody. Let's protect it.
 
@@ -93,11 +93,6 @@ Your app is working well but it's available to everybody. Let's protect it.
 
   [Documentation; Read Enabling IAP for Cloud Run](https://cloud.google.com/iap/docs/enabling-cloud-run)
 
-## Task 6 - Bonus 2
+## Task 7 - Bonus 3 - Event Driven
 
-The files status are not updated. Update the workflow to update it.<br />
-Note that the object id saved in base is save in the GCS file metadata.
-
-## Task 7 - Bonus 3
-
-Update the code in `lab-5/backstage/src/app/api/files/route.js` to not call `copyFile` but trigger the function from an EventArc trigger, on new file saved in datastore.
+Update the code in `lab-5/backstage/src/app/api/files/route.js` to not call `copyFile`. Call the endpoint `http://<cloud-run-url>/api/files/{fileId}/copy`, from an EventArc trigger, when a new file is saved in datastore.
