@@ -4,6 +4,8 @@ const db = new Firestore({
   projectId: process.env.FIRESTORE_PROJECT_ID,
 })
 
+db.settings({ ignoreUndefinedProperties: true })
+
 export const getAllFiles = async () => {
   const snapshot = await db.collection("files").get()
   const docs = snapshot.docs.map((doc) => {
@@ -33,6 +35,26 @@ export const addFile = async ({ name, size, type, filename }) => {
   })
 
   return res
+}
+
+export const updateFile = async (
+  fileId,
+  { status, workflowExecutionId, srcFilename, destFilename }
+) => {
+  const file = await db.collection("files").doc(fileId)
+
+  await file.set(
+    {
+      status,
+      workflowExecutionId,
+      srcFilename,
+      destFilename,
+      updatedTime: FieldValue.serverTimestamp(),
+    },
+    { merge: true, ignoreUndefinedProperties: true }
+  )
+
+  return await db.collection("files").doc(fileId).get()
 }
 
 export default db

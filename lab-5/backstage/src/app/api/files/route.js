@@ -10,6 +10,7 @@ export const POST = async (request) => {
     } = json
 
     const file = await addFile({ name, size, type, filename })
+
     await copyFile({
       fileId: file.id,
       srcFilename: filename,
