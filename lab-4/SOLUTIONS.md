@@ -22,47 +22,47 @@ Create a new file locally named workflow.yaml and paste the following content.
 main:
   params: [event]
   steps:
-  - init:
-      assign:
-        - project_id: ${sys.get_env("GOOGLE_CLOUD_PROJECT_ID")}
-        - secret_id: virus_scanning_api_key
-        - cloud_run_job_name: encoder
-        - cloud_run_job_location: europe-west1
-        - source_uri: ${"gs://" + event.data.bucket + "/" + event.data.name}
-        - destination_uri: ${"gs://" + sys.get_env("GOOGLE_CLOUD_PROJECT_ID") + "-end/lab-4/" + text.replace_all(event.data.name, ".flac", ".mp3")}
-  - access_string_secret:
-      call: googleapis.secretmanager.v1.projects.secrets.versions.accessString
-      args:
-        secret_id: ${secret_id}
-        project_id: ${project_id}
-      result: virus_scanning_api_key_str
-  - virus_scanning:
-      call: http.post
-      args:
-        url: https://httpbin.org/anything
-        body:
-          file_url: ${source_uri}
-          is_safe: true
-        headers:
-          x-apikey: ${virus_scanning_api_key_str}
-          accept: application/json
-          content-type: application/json
-      result: virus_scanning_result
-  - virus_scanning_check:
-      switch:
-        - condition: ${not(virus_scanning_result.body.json.is_safe)}
-          return: "not_safe"
-  - run_encoder_job:
-      call: googleapis.run.v1.namespaces.jobs.run
-      args:
-        name: ${"namespaces/" + project_id + "/jobs/" + cloud_run_job_name}
-        location: ${cloud_run_job_location}
-        body:
-          overrides:
-            containerOverrides:
-              args:
-                - ${source_uri}
-                - ${destination_uri}
+    - init:
+        assign:
+          - project_id: ${sys.get_env("GOOGLE_CLOUD_PROJECT_ID")}
+          - secret_id: virus_scanning_api_key
+          - cloud_run_job_name: encoder
+          - cloud_run_job_location: europe-west1
+          - source_uri: ${"gs://" + event.data.bucket + "/" + event.data.name}
+          - destination_uri: ${"gs://" + project_id + "-end/lab-4/" + text.replace_all(event.data.name, ".flac", ".mp3")}
+    - access_string_secret:
+        call: googleapis.secretmanager.v1.projects.secrets.versions.accessString
+        args:
+          secret_id: ${secret_id}
+          project_id: ${project_id}
+        result: virus_scanning_api_key_str
+    - virus_scanning:
+        call: http.post
+        args:
+          url: https://httpbin.org/anything
+          body:
+            file_url: ${source_uri}
+            is_safe: true
+          headers:
+            x-apikey: ${virus_scanning_api_key_str}
+            accept: application/json
+            content-type: application/json
+        result: virus_scanning_result
+    - virus_scanning_check:
+        switch:
+          - condition: ${not(virus_scanning_result.body.json.is_safe)}
+            return: "not_safe"
+    - run_encoder_job:
+        call: googleapis.run.v1.namespaces.jobs.run
+        args:
+          name: ${"namespaces/" + project_id + "/jobs/" + cloud_run_job_name}
+          location: ${cloud_run_job_location}
+          body:
+            overrides:
+              containerOverrides:
+                args:
+                  - ${source_uri}
+                  - ${destination_uri}
 ```
 
 ### Task 3
