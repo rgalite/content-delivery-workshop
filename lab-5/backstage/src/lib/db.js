@@ -51,10 +51,13 @@ export const updateFile = async (
       destFilename,
       updatedTime: FieldValue.serverTimestamp(),
     },
-    { merge: true, ignoreUndefinedProperties: true }
+    { merge: true }
   )
 
-  return await db.collection("files").doc(fileId).get()
+  return db.collection("files").doc(fileId).get()
 }
+
+export const getFile = async (fileId) =>
+  db.collection("files").doc(fileId).get()
 
 export default db
