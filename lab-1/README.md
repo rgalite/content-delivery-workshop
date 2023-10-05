@@ -4,19 +4,19 @@ The aim of this lab is building our the first step of our application. We'll let
 
 ## Introduction
 
-* Set up the environment variable `PROJECT_ID`
+- Set up the environment variable `PROJECT_ID`
 
   ```bash
   export PROJECT_ID=$(gcloud config get project)
   ```
 
-* Make sure you are in the `lab-1` directory to start this lab.
+- Make sure you are in the `lab-1` directory to start this lab.
 
   ```bash
   cd lab-1
   ```
 
-* Download a FLAC file and store in in the `media` directory. To make things simple, make sure the file doesn't contain any space.
+- Download a FLAC file and store in in the `media` directory. To make things simple, make sure the file doesn't contain any space.
 
 ## Creating buckets
 
@@ -39,7 +39,7 @@ gcloud storage cp ./media/Get-Lucky-Daft-Punk-feat-Pharrell-Williams.flac gs://$
 This is the output you should get
 
 ```
-Copying file://./media/Get-Lucky-Daft-Punk-feat-Pharrell-Williams.flac to gs://believe-poc-start/Get-Lucky-Daft-Punk-feat-Pharrell-Williams.flac
+Copying file://./media/Get-Lucky-Daft-Punk-feat-Pharrell-Williams.flac to gs://company-poc-start/Get-Lucky-Daft-Punk-feat-Pharrell-Williams.flac
   Completed files 1/1 | 127.4MiB/127.4MiB
 
 Average throughput: 106.4MiB/s
@@ -54,7 +54,7 @@ gcloud storage cp gs://$PROJECT_ID-start/Get-Lucky-Daft-Punk-feat-Pharrell-Willi
 You should see something like this.
 
 ```
-Copying gs://believe-poc-start/Get-Lucky-Daft-Punk-feat-Pharrell-Williams.flac to file://./downloaded.flac
+Copying gs://company-poc-start/Get-Lucky-Daft-Punk-feat-Pharrell-Williams.flac to file://./downloaded.flac
   Completed files 1/1 | 127.4MiB/127.4MiB
 
 Average throughput: 611.2MiB/s
