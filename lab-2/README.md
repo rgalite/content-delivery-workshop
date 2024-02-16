@@ -9,6 +9,8 @@ Make sure these environment variables are defined before starting.
 export PROJECT_ID=$(gcloud config get project)
 ```
 
+Create a second bucket that you'll name `${PROJECT_ID}-end`. The class must be Standard and the bucket must be located in Europe.
+
 Install ffmeg to your local workstation. If you're running this lab in cloud shell or in a debian-based machine, the following commands will install the binary.
 Otherwise, please refer to ffmeg [documentation](https://ffmpeg.org/download.html).
 
