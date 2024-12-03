@@ -101,19 +101,21 @@ main:
 
 - The workflow will need access our Cloud Run Job. Give the role `invoker` and `developer` to the cloud run job `encoder` to the service account `sa-workflow-flac-to-mp3`.
 
-```bash
-gcloud run jobs add-iam-policy-binding encoder --region europe-west1 \
-    --member=serviceAccount:sa-workflow-flac-to-mp3@${PROJECT_ID}.iam.gserviceaccount.com \
-    --role=roles/run.developer
-```
+  ```bash
+  gcloud run jobs add-iam-policy-binding encoder --region europe-west1 \
+      --member=serviceAccount:sa-workflow-flac-to-mp3@${PROJECT_ID}.iam.gserviceaccount.com \
+      --role=roles/run.developer
+  ```
 
-```bash
-gcloud run jobs add-iam-policy-binding encoder --region europe-west1 \
-    --member=serviceAccount:sa-workflow-flac-to-mp3@${PROJECT_ID}.iam.gserviceaccount.com \
-    --role=roles/run.invoker
-```
+  ```bash
+  gcloud run jobs add-iam-policy-binding encoder --region europe-west1 \
+      --member=serviceAccount:sa-workflow-flac-to-mp3@${PROJECT_ID}.iam.gserviceaccount.com \
+      --role=roles/run.invoker
+  ```
 
 ## Task 4
+
+Deploy the workflow.
 
 ```bash
 gcloud workflows deploy workflow-flac-to-mp3 --source=workflow.yaml \
